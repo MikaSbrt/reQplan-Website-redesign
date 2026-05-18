@@ -1,0 +1,194 @@
+/* ========================================
+   REQPLAN GMBH – ANIMATIONS CSS
+   ======================================== */
+
+/* === REVEAL ON SCROLL === */
+.reveal,
+.reveal-left,
+.reveal-right,
+.reveal-scale {
+  opacity: 0;
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.reveal        { transform: translateY(40px); }
+.reveal-left   { transform: translateX(-40px); }
+.reveal-right  { transform: translateX(40px); }
+.reveal-scale  { transform: scale(0.94); }
+
+.reveal.visible,
+.reveal-left.visible,
+.reveal-right.visible,
+.reveal-scale.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* === STAGGER DELAYS === */
+.stagger-1 { transition-delay: 0.08s; }
+.stagger-2 { transition-delay: 0.16s; }
+.stagger-3 { transition-delay: 0.24s; }
+.stagger-4 { transition-delay: 0.32s; }
+.stagger-5 { transition-delay: 0.40s; }
+
+/* === HERO GLITCH REVEAL === */
+@keyframes glitch-1 {
+  0%, 100% { clip-path: inset(0 0 95% 0); transform: translate(-4px, 0); }
+  20%       { clip-path: inset(80% 0 0 0);  transform: translate(4px, 0); }
+  40%       { clip-path: inset(40% 0 50% 0); transform: translate(0, 0); }
+  60%       { clip-path: inset(60% 0 30% 0); transform: translate(-2px, 0); }
+  80%       { clip-path: inset(10% 0 85% 0); transform: translate(2px, 0); }
+}
+
+@keyframes glitch-2 {
+  0%, 100% { clip-path: inset(50% 0 30% 0); transform: translate(4px, 0); opacity: 0.7; }
+  20%       { clip-path: inset(20% 0 70% 0); transform: translate(-4px, 0); }
+  40%       { clip-path: inset(0 0 90% 0);   transform: translate(2px, 0); }
+  60%       { clip-path: inset(70% 0 10% 0); transform: translate(-2px, 0); }
+  80%       { clip-path: inset(30% 0 60% 0); transform: translate(0, 0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.hero-headline {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-headline.glitch-active::before,
+.hero-headline.glitch-active::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: inherit;
+  font-weight: inherit;
+  color: var(--color-accent);
+  pointer-events: none;
+}
+
+.hero-headline.glitch-active::before {
+  animation: glitch-1 0.3s steps(1) 2;
+}
+
+.hero-headline.glitch-active::after {
+  animation: glitch-2 0.3s steps(1) 2;
+  color: var(--color-accent-glow);
+}
+
+/* === CTA PULSE === */
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(232,0,111,0.5); }
+  70%  { box-shadow: 0 0 0 12px rgba(232,0,111,0); }
+  100% { box-shadow: 0 0 0 0 rgba(232,0,111,0); }
+}
+
+.btn--pulse {
+  animation: pulse-ring 2.2s ease-out infinite;
+}
+
+/* === BUTTON HOVER === */
+@keyframes btn-glow {
+  from { box-shadow: 0 0 8px rgba(232,0,111,0.4); }
+  to   { box-shadow: 0 0 24px rgba(232,0,111,0.7), 0 0 48px rgba(232,0,111,0.2); }
+}
+
+/* === NUMBER COUNTER === */
+.counter-value {
+  display: inline-block;
+}
+
+/* === STATEMENT DIVIDER ANIMATION === */
+.statement-divider {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.statement-divider.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* === PARALLAX HERO === */
+.hero-bg {
+  will-change: transform;
+  transition: none;
+}
+
+/* === ICON HOVER === */
+.service-icon-item:hover .icon-wrap svg,
+.service-icon-item:hover .icon-wrap img {
+  animation: icon-bounce 0.4s ease;
+}
+
+@keyframes icon-bounce {
+  0%, 100% { transform: translateY(0); }
+  40%       { transform: translateY(-6px); }
+  70%       { transform: translateY(-2px); }
+}
+
+/* === UNDERLINE GROW === */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 1px;
+  transition: width var(--transition);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* === CARD REVEAL WITH STAGGER === */
+.service-card,
+.leistung-card,
+.icon-item {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.service-card.visible,
+.leistung-card.visible,
+.icon-item.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* === HERO ELEMENTS ANIMATION === */
+.hero-badge {
+  animation: fadeIn 0.6s ease 0.3s both;
+}
+
+.hero-title {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+}
+
+.hero-sub {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
+}
+
+.hero-cta {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s both;
+}
